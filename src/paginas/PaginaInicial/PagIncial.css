@@ -1,0 +1,82 @@
+body{
+    background-color: #ececec;
+    margin: 0;
+}
+.cabecalho{
+margin-left: 260px;
+
+}
+
+.tituloprinc{
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: #34445c;
+}
+  
+.quantidades-container{
+    margin-left: 150px;
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 40px;
+    margin: 20px;
+    width: 250px; /* largura dos cards */
+    height: 160px; /* altura dos cards */
+    text-align: center;
+    margin-top: 100px;
+    
+  }
+  
+  .card h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    
+  }
+  
+  .card p {
+    font-size: 25px;
+    margin: 0;
+  }
+  
+  .card.blue {
+    background-color: #2c94fc; /* azul */
+    color: #fff; /* texto branco para contrastar */
+  }
+  
+  .card.green {
+    background-color: #24a45c; /* verde */
+    color: #fff; /* texto branco para contrastar */
+  }
+  
+  .card.yellow {
+    background-color: #fcac0c; /* amarelo */
+    color: #ffffff; /* texto preto para contrastar */
+  }
+  
+  .card.red {
+    background-color: #e74c3c; /* vermelho */
+    color: #fff; /* texto branco para contrastar */
+  }
+
+  .card img {
+    position: absolute;
+    top: 10px; /* distância do topo */
+    left: 10px; /* distância da esquerda */
+    width: 30px; /* largura da imagem */
+    height: 30px; /* altura da imagem */
+    border-radius: 50%; /* torna a imagem redonda */
+  }
+
+  .dash{
+    display: flex;
+    justify-content: center;
+    font-size: 60px;
+    font-weight: bold;
+    color: #34445c;
+  }
+  

@@ -1,0 +1,53 @@
+.cabecalhoCP{
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.tituloCP{
+    font-size: 70px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.divBotao{
+    width: 60px;
+    height: 60px;
+}
+
+
+  
+  .funcProduto > div {
+    margin-bottom: 20px; /* Adiciona um espaço entre os elementos dentro de funcProduto */
+   
+  }
+  
+  .form-label {
+    font-size: 18px;
+    color: #000000;
+    margin-bottom: 5px;
+    display: block;
+    margin-left: 50px;
+    font-weight: bold;
+    
+  }
+  
+  .form-control {
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 17px;
+    margin-left: 50px;
+  }
+  
+  .form-control:focus {
+    border-color: #007bff;
+    
+  }
+
+ 
+  

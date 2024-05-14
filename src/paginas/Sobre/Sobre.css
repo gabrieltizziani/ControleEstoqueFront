@@ -1,0 +1,38 @@
+.bodyS{
+    background-color: #bbc2cc;
+}
+.titulo{
+    display: flex;
+    justify-content: center;
+    font-size: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.bemvindo{
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.regras{
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.regraFuncio{
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.contato{
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.contatoqr{
+    width: 150px;
+}
+
+.subTitulo{
+    font-weight: bold;
+}
