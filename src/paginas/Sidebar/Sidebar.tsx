@@ -77,7 +77,7 @@ const Sidebar = () => {
         <li>
           <Link to="/QuantidadeProduto" onClick={goToQuantidadeProduto}>
             <img src="img/QuantidadeProduto.png" alt="QuantidadeProduto" />
-            <span>Quantidade Produto</span>
+            <span>Saldo Estoque</span>
           </Link>
         </li>
         <li>

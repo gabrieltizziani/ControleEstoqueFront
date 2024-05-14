@@ -18,24 +18,24 @@
 }
 
 .tableQ {
-    border-collapse: collapse;
-    width: 50%;
-    margin-left: 260px;
-  }
-  
-  .tableQ th,
-  .tableQ td {
-    padding: 5px; /* Ajuste o valor conforme necessário */
-    border: 1px solid #ddd;
-    text-align: left;
-  }
-  
-  .tableQ th {
-    background-color: #f2f2f2;
-    color: rgb(0, 0, 0);
-  }
+  border-collapse: collapse;
+  width: 50%;
+  margin-left: 260px;
+  margin-top: 20px; /* Adicionado para espaçamento superior */
+}
 
-  .quant{
-    display: flex;
-    justify-content: center;
-  }
+.tableQ th,
+.tableQ td {
+  padding: 8px;
+  border: 1px solid #ddd;
+  text-align: center; /* Alterado para centralizar todo o conteúdo */
+}
+
+.tableQ th {
+  background-color: #f2f2f2;
+  color: rgb(0, 0, 0);
+}
+
+  .quant, .valor {
+    text-align: center; /* Adicionado para centralizar */
+}
