@@ -51,7 +51,7 @@ function QuantidadeProduto() {
         <div>
             <Sidebar />
             <div className="cabecalhoQuant">
-                <h1 className="tituloQuant">Quantidade Produto</h1>
+                <h1 className="tituloQuant">Saldo Estoque</h1>
             </div>
             {loading && <p>Carregando...</p>}
             {error && <p>{error}</p>}

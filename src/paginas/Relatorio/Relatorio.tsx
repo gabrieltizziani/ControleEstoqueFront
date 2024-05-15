@@ -113,7 +113,7 @@ function Relatorio() {
             <input type="submit" className="btn btn-success" style={{ marginLeft: "260px" }} value="Gerar Relatório" />
           </div>
         </form>
-        <hr />
+        <hr style={{ marginLeft: "250px" }}/>
 
         {tipoRelatorio && relatorio.length > 0 && (
           <div className="relatorio">

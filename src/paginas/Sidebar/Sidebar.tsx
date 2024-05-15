@@ -81,11 +81,12 @@ const Sidebar = () => {
           </Link>
         </li>
         <li>
-          <button className='sobre' onClick={openSobrePage}>
+          <Link onClick={openSobrePage}>
             <img src="img/Sobre.png" alt="Sobre" />
             <span>Sobre</span>
-          </button>
+          </Link>
         </li>
+        
       </ul>
     </div>
   );
