@@ -1,29 +1,41 @@
-import "./CadastroProduto.css"
-import React, {useEffect, useState, ChangeEvent} from 'react';
+import './CadastroProduto.css';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import Sidebar from "../Sidebar/Sidebar";
-
 
 function CadastroProduto(){
   const [cadastroProduto, setCadastroProduto] = useState({nomeProduto: "", precoProduto: ""});
   const [cadastrosProdutos, setCadastrosProdutos] = useState ([]);
   const [atualizar, setAtualizar] = useState();
- 
+  const token = localStorage.getItem('token'); // Armazene o token em uma variável
+
   useEffect(()=>{
-    axios.get("http://localhost:8080/produtos").then(result =>{
+    const axiosInstance = axios.create({
+      baseURL: 'http://localhost:8080',
+      headers: {
+        Authorization: `Bearer ${token}` // Inclua o token no cabeçalho
+      }
+    });
+
+    axiosInstance.get("/produtos").then(result =>{
       setCadastrosProdutos(result.data);
-      
     })
   },[atualizar])
 
-  
   function handleChange(event){
     setCadastroProduto({...cadastroProduto,[event.target.name]:event.target.value})
   }
 
   function handleSubmit(event){
     event.preventDefault();
-    axios.post("http://localhost:8080/produtos", cadastroProduto).then(result=>{
+    const axiosInstance = axios.create({
+      baseURL: 'http://localhost:8080',
+      headers: {
+        Authorization: `Bearer ${token}` // Inclua o token no cabeçalho
+      }
+    });
+
+    axiosInstance.post("/produtos", cadastroProduto).then(result=>{
       setAtualizar(result) ;
       alert('Produto cadastrado com sucesso!');
     })
@@ -35,16 +47,29 @@ function CadastroProduto(){
   }
 
   function editar (produto){
-    axios.put("http://localhost:8080/produtos/", cadastroProduto).then(result=>{
+    const axiosInstance = axios.create({
+      baseURL: 'http://localhost:8080',
+      headers: {
+        Authorization: `Bearer ${token}` // Inclua o token no cabeçalho
+      }
+    });
+
+    axiosInstance.put("/produtos/", cadastroProduto).then(result=>{
       setAtualizar(result) ;
       alert('Produto alterado com sucesso!');
       limpar();
     })
-    
   }
 
   function excluirProduto(idProduto) {
-    axios.delete(`http://localhost:8080/produtos/${idProduto}`).then(result => {
+    const axiosInstance = axios.create({
+      baseURL: 'http://localhost:8080',
+      headers: {
+        Authorization: `Bearer ${token}` // Inclua o token no cabeçalho
+      }
+    });
+
+    axiosInstance.delete(`/produtos/${idProduto}`).then(result => {
       setAtualizar(result);
       alert('Produto excluído com sucesso!');
     }).catch(error => {
@@ -52,15 +77,14 @@ function CadastroProduto(){
       alert('Erro ao excluir o produto. Verifique se ele está sendo usado em entradas ou saídas.');
     });
   }
-  
+
   function limpar(){
     setCadastroProduto({
       nomeProduto: " ", 
       precoProduto: " "
     });
   }
-  
-  
+
   return (
     <div>
       <Sidebar/>

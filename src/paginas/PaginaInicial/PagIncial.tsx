@@ -12,13 +12,22 @@ function PagInicial() {
     saidas: 0
   });
 
+  const token = localStorage.getItem('token'); // Armazene o token em uma variável
+
   useEffect(() => {
     async function fetchQuantidades() {
       try {
-        const produtosResponse = await axios.get('http://localhost:8080/quantidade/produtos');
-        const funcionariosResponse = await axios.get('http://localhost:8080/quantidade/funcionarios');
-        const entradasResponse = await axios.get('http://localhost:8080/quantidade/entradas');
-        const saidasResponse = await axios.get('http://localhost:8080/quantidade/saidas');
+        const axiosInstance = axios.create({
+          baseURL: 'http://localhost:8080',
+          headers: {
+            Authorization: `Bearer ${token}` // Inclua o token no cabeçalho
+          }
+        });
+
+        const produtosResponse = await axiosInstance.get('/quantidade/produtos');
+        const funcionariosResponse = await axiosInstance.get('/quantidade/funcionarios');
+        const entradasResponse = await axiosInstance.get('/quantidade/entradas');
+        const saidasResponse = await axiosInstance.get('/quantidade/saidas');
 
         setQuantidades({
           produtos: produtosResponse.data,

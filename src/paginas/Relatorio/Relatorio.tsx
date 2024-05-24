@@ -9,21 +9,24 @@ function Relatorio() {
   const [valorTotal, setValorTotal] = useState(0);
   const [funcionarioSelecionado, setFuncionarioSelecionado] = useState("");
   const [funcionarios, setFuncionarios] = useState([]);
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
-    // Função para buscar a lista de funcionários do servidor
     const fetchFuncionarios = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/funcionarios");
-        setFuncionarios(response.data); // Atualiza o estado 'funcionarios' com a lista de funcionários
+        const response = await axios.get("http://localhost:8080/funcionarios", {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        setFuncionarios(response.data);
       } catch (error) {
         console.error("Erro ao buscar funcionários:", error);
       }
     };
 
-    // Chama a função de busca quando o componente é montado
     fetchFuncionarios();
-  }, []); // A dependência vazia [] indica que este efeito é executado apenas uma vez, quando o componente é montado
+  }, [token]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -31,20 +34,23 @@ function Relatorio() {
     const dataInicial = formData.get("dataInicial");
     const dataFinal = formData.get("dataFinal");
     const tipo = formData.get("tipo");
-  
+
     const params = { dataInicial, dataFinal };
     if (tipo === "saida") {
       const idFuncionario = formData.get("funcionario");
-      if (idFuncionario !== "") { // Verifica se um funcionário foi selecionado
+      if (idFuncionario !== "") {
         params.funcionario = idFuncionario;
       }
     }
-  
+
     try {
       const response = await axios.get(`http://localhost:8080/relatorios/${tipo}s`, {
         params: params,
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       });
-  
+
       if (response.data.entradas && Array.isArray(response.data.entradas)) {
         setRelatorio(response.data.entradas);
         setTipoRelatorio(tipo);

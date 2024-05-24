@@ -26,9 +26,8 @@ const Sidebar = () => {
   const goToQuantidadeProduto = () => {
     navigate('/QuantidadeProduto')
   }
-  const openSobrePage = () => {
-    
-    window.open('/Sobre', '_blank', 'width=800,height=600');
+  const goToSobre = () => {
+    navigate('/Sobre')
   }
 
   return (
@@ -81,7 +80,7 @@ const Sidebar = () => {
           </Link>
         </li>
         <li>
-          <Link onClick={openSobrePage}>
+          <Link to='/Sobre' onClick={goToSobre}>
             <img src="img/Sobre.png" alt="Sobre" />
             <span>Sobre</span>
           </Link>
