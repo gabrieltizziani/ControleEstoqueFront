@@ -126,11 +126,11 @@ function Entrada() {
               <input onChange={handleChange} value={entrada.notaFiscal} name="notaFiscal" type="text" className="form-control" />
             </div>
             <br />
-            <input type="submit" className="btn btn-success" style={{ marginLeft: "260px" }} value="Cadastrar"></input>
+            <input type="submit" className="btn btn-success" style={{ marginLeft: "230px" }} value="Cadastrar"></input>
           </div>
         </form>
         <hr className="linha"></hr>
-        <table className="table">
+        <table className="table" style={{ marginLeft: "230px" }}>
           <thead>
             <tr>
               <th scope="col">Data Entrada</th>

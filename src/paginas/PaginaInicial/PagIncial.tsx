@@ -73,10 +73,6 @@ function PagInicial() {
         <p>{quantidades.saidas}</p>
       </div>
     </div>
-
-    
-     
-
     </div>
   );
 }

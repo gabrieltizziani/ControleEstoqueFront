@@ -19,34 +19,31 @@ const LoginForm: React.FC<LoginFormProps> = ({ setToken }) => {
       });
       const token = response.data.token;
       setToken(token);
+      localStorage.setItem('token', token);  // Armazene o token no localStorage
     } catch (error) {
       console.error(error);
     }
   };
 
   return (
-    <div className="login-container">
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Email:
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </label>
-        <label>
-          Password:
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
-        <button type="submit">Login</button>
-      </form>
-    </div>
+    <body className='bodyLogin'>
+      <section>
+        <form onSubmit={handleSubmit}>
+          <h1 className='h1Login'>Login</h1>
+          <div className='inputbox'>
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
+            <label htmlFor=''>Email:</label>
+          </div>
+          <div className='inputbox'>
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
+          <label> Password:</label>
+          </div>
+          
+          
+          <button type="submit">Login</button>
+        </form>
+      </section>
+    </body>
   );
 };
 

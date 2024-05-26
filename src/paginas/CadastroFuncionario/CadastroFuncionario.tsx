@@ -83,11 +83,11 @@ function CadastroFuncionario(){
                 <input onChange={handleChange} value={cadastroFuncionario.funcaoFuncionario} name="funcaoFuncionario" type="text" className="form-control"/>
             </div>
             <br/>
-            <input type="submit" className="btn btn-success" style={{ marginLeft: "260px" }} value="Cadastrar"></input>
+            <input type="submit" className="btn btn-success" style={{ marginLeft: "230px" }} value="Cadastrar"></input>
           </div>
         </form>
         <hr className="linha"></hr>
-        <table className="table" style={{ marginLeft: "250px" }}>
+        <table className="table" style={{ marginLeft: "230px" }}>
           <thead>
             <tr>
               <th scope="col">Nome Funcionário</th>
@@ -103,7 +103,7 @@ function CadastroFuncionario(){
                 <td>{funcionario.numeroFuncionario}</td>
                 <td>{funcionario.funcaoFuncionario}</td>
                 <td>
-                  <button onClick={() => setCadastroFuncionario(funcionario)} className="btn btn-warning">Altere Informações</button>
+                  <button onClick={() => setCadastroFuncionario(funcionario)} className="btn btn-warning">Alterar</button>
                   <button onClick={() => excluir(funcionario.idFuncionario)} className="btn btn-danger">Excluir</button>
                 </td>    
               </tr>

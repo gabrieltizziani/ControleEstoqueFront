@@ -70,7 +70,12 @@ function Saida() {
 
     axiosInstance.post("/saida", saida).then(result => {
       setAtualizar(result);
+      alert('Saída realizada com sucesso!');
+    }).catch(error => {
+      console.error('Erro ao realizar saída:', error);
+      alert('Erro ao realizar a saída. Verifique se todos os espaços estão preenchidos.');
     });
+    
   }
 
   function excluir(idSaida) {
@@ -83,6 +88,10 @@ function Saida() {
 
     axiosInstance.delete(`/saida/${idSaida}`).then(result => {
       setAtualizar(result);
+      alert('Saída excluída com sucesso!');
+    }).catch(error => {
+      console.error('Erro ao excluir saída:', error);
+      alert('Erro ao excluir a saída.');
     });
   }
 
@@ -141,11 +150,11 @@ function Saida() {
             </div>
 
             <br />
-            <input type="submit" className="btn btn-success" style={{ marginLeft: "260px" }} value="Cadastrar"></input>
+            <input type="submit" className="btn btn-success" style={{ marginLeft: "230px" }} value="Cadastrar"></input>
           </div>
         </form>
         <hr className="linha"></hr>
-        <table className="table" style={{ marginLeft: "250px" }}>
+        <table className="table" style={{ marginLeft: "230px" }}>
           <thead>
             <tr>
               <th scope="col">Data Saida</th>
