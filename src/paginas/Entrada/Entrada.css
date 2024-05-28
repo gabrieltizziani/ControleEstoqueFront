@@ -13,6 +13,10 @@
     color: #34445c;
 }
 
+.btn-entrada{
+  margin-left: 230px;
+}
+
 .divBotao{
     width: 60px;
     height: 60px;
@@ -25,27 +29,27 @@
    
   }
   
-  .form-label {
+  .form-labelEnt {
     font-size: 18px;
     color: #000000;
     margin-bottom: 5px;
     display: block;
-    margin-left: 50px;
+    margin-left: 230px;
     font-weight: bold;
     
   }
   
-  .form-control {
-    width: 50%;
+  .form-controlEnt {
+    width: 15%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
     font-size: 17px;
-    margin-left: 50px;
+    margin-left: 230px;
   }
   
-  .form-control:focus {
+  .form-controlEnt:focus {
     border-color: #007bff;
     
   }
@@ -61,20 +65,75 @@
   
 }
 
-.table {
+.tableEntrada {
   border-collapse: collapse;
-  width: 90%;
-  margin-left: 245px;
+  width: 85%;
+  margin-left: 230px;
 }
 
-.table th,
-.table td {
+.tableEntrada th,
+.tableEntrada td {
   padding: 5px; /* Ajuste o valor conforme necessário */
   border: 1px solid #ddd;
   text-align: left;
 }
 
-.table th {
+.tableEntrada th {
   background-color: #f2f2f2;
   color: rgb(0, 0, 0);
+}
+
+
+@media (max-width: 768px) {
+  .tituloEnt{
+    font-size: 33px;
+    padding-top: 60px;
+  }
+
+  .tableEntrada {
+    border-collapse: collapse;
+    width: 80%;
+    margin-left: 10px;
+  }
+  
+  .tableEntrada th,
+  .tableEntrada td {
+    padding: 5px; /* Ajuste o valor conforme necessário */
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .tableEntrada th {
+    background-color: #f2f2f2;
+    color: rgb(0, 0, 0);
+  }
+
+  .form-labelEnt {
+    font-size: 18px;
+    color: #000000;
+    margin-bottom: 5px;
+    display: block;
+    margin-left: 20px;
+    font-weight: bold;
+    
+  }
+  
+  .form-controlEnt {
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 17px;
+    margin-left: 20px;
+  }
+  
+  .linhaCD{
+    margin-left: 0px;
+  }
+
+  .btn-entrada{
+    margin-left: 20px;
+  }
+
 }

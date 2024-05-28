@@ -18,6 +18,10 @@
     height: 60px;
 }
 
+.btn-saida{
+  margin-left: 230px;
+}
+
 
   
   .funcSaida > div {
@@ -25,38 +29,104 @@
     
   }
   
-  .form-label {
+  .form-labelSaida {
     font-size: 18px;
     color: #000000;
     margin-bottom: 5px;
     display: block;
-    margin-left: 50px;
+    margin-left: 230px;
     font-weight: bold;
     
   }
   
-  .form-control {
-    width: 50%;
+  .form-controlSaida {
+    width: 15%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
     font-size: 17px;
-    margin-left: 50px;
+    margin-left: 230px;
   }
   
-  .form-control:focus {
+  .form-controlSaida:focus {
     border-color: #007bff;
     
   }
 
-  .btn {
-    margin-left: 50px;
-    width: 150px;
-    font-weight: bold;
-  }
 
-  .linha{
-    margin-left: 250px;
+  .linhaSaida{
+    margin-left: 210px;
   }
   
+  .tableSaida {
+    border-collapse: collapse;
+    width: 90%;
+    margin-left: 230px;
+  }
+  
+  .tableSaida th,
+  .tableSaida td {
+    padding: 5px; /* Ajuste o valor conforme necessário */
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .tableSaida th {
+    background-color: #f2f2f2;
+    color: rgb(0, 0, 0);
+  }
+
+  @media (max-width: 768px) {
+    .tituloSaida{
+      font-size: 33px;
+      padding-top: 60px;
+    }
+  
+    .tableSaida {
+      border-collapse: collapse;
+      width: 100%;
+      margin-left: 10px;
+    }
+    
+    .tableSaida th,
+    .tableSaida td {
+      padding: 5px; /* Ajuste o valor conforme necessário */
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    
+    .tableSaida th {
+      background-color: #f2f2f2;
+      color: rgb(0, 0, 0);
+    }
+  
+    .form-labelSaida {
+      font-size: 18px;
+      color: #000000;
+      margin-bottom: 5px;
+      display: block;
+      margin-left: 20px;
+      font-weight: bold;
+      
+    }
+    
+    .form-controlSaida {
+      width: 50%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+      font-size: 17px;
+      margin-left: 20px;
+    }
+    
+    .linhaSaida{
+      margin-left: 0px;
+    }
+  
+    .btn-saida{
+      margin-left: 20px;
+    }
+  
+  }

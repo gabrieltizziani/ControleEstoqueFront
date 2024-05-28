@@ -1,34 +1,29 @@
-.cabecalhoQuant{
-    display: flex;
-    justify-content: center;
+/* QuantidadeProduto.css */
+
+.cabecalhoQuant {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; /* Adiciona espaçamento superior */
 }
 
-.tituloQuant{
-    color: #34445c;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
-}
-
-.form-label{
-    margin-left: 230px;
-}
-
-.form-control{
-    margin-left: 230px;
+.tituloQuant {
+  color: #34445c;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  text-align: center; /* Centraliza o texto */
 }
 
 .tableQ {
   border-collapse: collapse;
-  width: 50%;
-  margin-left: 260px;
-  margin-top: 20px; /* Adicionado para espaçamento superior */
+  width: 60%; /* Define a largura da tabela */
+  margin: 20px auto; /* Centraliza a tabela */
 }
 
 .tableQ th,
 .tableQ td {
   padding: 8px;
   border: 1px solid #ddd;
-  text-align: center; /* Alterado para centralizar todo o conteúdo */
+  text-align: center;
 }
 
 .tableQ th {
@@ -36,6 +31,19 @@
   color: rgb(0, 0, 0);
 }
 
-  .quant, .valor {
-    text-align: center; /* Adicionado para centralizar */
+.quant,
+.valor {
+  text-align: center;
+}
+
+/* Media query para telas menores */
+@media (max-width: 768px) {
+  .cabecalhoQuant {
+    margin-top: 10px; /* Reduz o espaçamento superior */
+  }
+
+  .tableQ {
+    width: 100%; /* Define a largura da tabela para ocupar 100% do container */
+    margin: 10px auto; /* Centraliza a tabela */
+  }
 }

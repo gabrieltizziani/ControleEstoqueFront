@@ -8,6 +8,10 @@ function CadastroFuncionario(){
   const [cadastrosFuncionarios, setCadastrosFuncionarios] = useState([]);
   const [atualizar, setAtualizar] = useState();
   const token = localStorage.getItem('token');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const toggleSidebar = () => {
+      setIsSidebarOpen(!isSidebarOpen);
+    };
 
   useEffect(() => {
     const axiosInstance = axios.create({
@@ -63,31 +67,34 @@ function CadastroFuncionario(){
   
   return (
     <div>
-      <Sidebar/>
+      <button className="sidebar-toggle" onClick={toggleSidebar}>
+        ☰
+      </button>
+      <Sidebar isOpen={isSidebarOpen} />
       <div className="cabecalhoCF">
-        <h1 className="tituloCP">Cadastro de Funcionário</h1>
+        <h1 className="tituloCF">Cadastro de Funcionário</h1>
       </div>
       <div>
         <form onSubmit={handleSubmit}>
           <div className="funcFuncionario">
             <div>
-                <label className="form-label"> Nome do Funcionário:</label>
-                <input onChange={handleChange} value={cadastroFuncionario.nomeFuncionario} name="nomeFuncionario" type="text" className="form-control"/>
+                <label className="form-labelCF"> Nome do Funcionário:</label>
+                <input onChange={handleChange} value={cadastroFuncionario.nomeFuncionario} name="nomeFuncionario" type="text" className="form-controlCF"/>
             </div>
             <div>
-            <label className="form-label"> Número Funcionário:</label>
-                <input onChange={handleChange} value={cadastroFuncionario.numeroFuncionario} name="numeroFuncionario" type="number" className="form-control"/>
+            <label className="form-labelCF"> Número Funcionário:</label>
+                <input onChange={handleChange} value={cadastroFuncionario.numeroFuncionario} name="numeroFuncionario" type="number" className="form-controlCF"/>
             </div>
             <div>
-            <label className="form-label"> Função Funcionário:</label>
-                <input onChange={handleChange} value={cadastroFuncionario.funcaoFuncionario} name="funcaoFuncionario" type="text" className="form-control"/>
+            <label className="form-labelCF"> Função Funcionário:</label>
+                <input onChange={handleChange} value={cadastroFuncionario.funcaoFuncionario} name="funcaoFuncionario" type="text" className="form-controlCF"/>
             </div>
             <br/>
-            <input type="submit" className="btn btn-success" style={{ marginLeft: "230px" }} value="Cadastrar"></input>
+            <input type="submit" className="btn btn-success btn-cf"  value="Cadastrar"></input>
           </div>
         </form>
-        <hr className="linha"></hr>
-        <table className="table" style={{ marginLeft: "230px" }}>
+        <hr className="linhaCF"></hr>
+        <table className="tableCF" >
           <thead>
             <tr>
               <th scope="col">Nome Funcionário</th>

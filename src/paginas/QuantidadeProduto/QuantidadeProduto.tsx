@@ -7,6 +7,10 @@ function QuantidadeProduto() {
     const [dadosProduto, setDadosProduto] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const toggleSidebar = () => {
+      setIsSidebarOpen(!isSidebarOpen);
+    };
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -59,7 +63,10 @@ function QuantidadeProduto() {
 
     return (
         <div>
-            <Sidebar />
+            <button className="sidebar-toggle" onClick={toggleSidebar}>
+            ☰
+            </button>
+            <Sidebar isOpen={isSidebarOpen} />
             <div className="cabecalhoQuant">
                 <h1 className="tituloQuant">Saldo Estoque</h1>
             </div>

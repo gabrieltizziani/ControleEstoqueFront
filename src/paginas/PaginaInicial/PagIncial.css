@@ -1,82 +1,132 @@
-body{
-    background-color: #ececec;
-    margin: 0;
-}
-.cabecalho{
-margin-left: 260px;
-
+body {
+  background-color: #ececec;
+  margin: 0;
 }
 
-.tituloprinc{
-    font-size: 20px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
-    color: #34445c;
+.cabecalho {
+  margin-left: 215px;
 }
-  
-.quantidades-container{
-    margin-left: 150px;
-    display: flex;
-    justify-content: center;
+
+.tituloprinc {
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  color: #34445c;
+}
+
+.quantidades-container {
+  margin-left: 150px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; /* Permite que os cards quebrem linha em telas menores */
 }
 
 .card {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 40px;
-    margin: 20px;
-    width: 250px; /* largura dos cards */
-    height: 160px; /* altura dos cards */
-    text-align: center;
-    margin-top: 100px;
-    
-  }
-  
-  .card h3 {
-    font-size: 22px;
-    margin-bottom: 10px;
-    
-  }
-  
-  .card p {
-    font-size: 25px;
-    margin: 0;
-  }
-  
-  .card.blue {
-    background-color: #2c94fc; /* azul */
-    color: #fff; /* texto branco para contrastar */
-  }
-  
-  .card.green {
-    background-color: #24a45c; /* verde */
-    color: #fff; /* texto branco para contrastar */
-  }
-  
-  .card.yellow {
-    background-color: #fcac0c; /* amarelo */
-    color: #ffffff; /* texto preto para contrastar */
-  }
-  
-  .card.red {
-    background-color: #e74c3c; /* vermelho */
-    color: #fff; /* texto branco para contrastar */
-  }
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 40px;
+  margin: 20px;
+  width: 250px; /* largura dos cards */
+  height: 160px; /* altura dos cards */
+  text-align: center;
+  position: relative;
+}
 
-  .card img {
-    position: absolute;
-    top: 10px; /* distância do topo */
-    left: 10px; /* distância da esquerda */
-    width: 30px; /* largura da imagem */
-    height: 30px; /* altura da imagem */
-    border-radius: 50%; /* torna a imagem redonda */
-  }
+.card h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
 
-  .dash{
-    display: flex;
-    justify-content: center;
-    font-size: 60px;
-    font-weight: bold;
-    color: #34445c;
-  }
+.card p {
+  font-size: 25px;
+  margin: 0;
+}
+
+.card.blue {
+  background-color: #2c94fc; /* azul */
+  color: #fff; /* texto branco para contrastar */
+}
+
+.card.green {
+  background-color: #24a45c; /* verde */
+  color: #fff; /* texto branco para contrastar */
+}
+
+.card.yellow {
+  background-color: #fcac0c; /* amarelo */
+  color: #fff; /* texto preto para contrastar */
+}
+
+.card.red {
+  background-color: #e74c3c; /* vermelho */
+  color: #fff; /* texto branco para contrastar */
+}
+
+.card img {
+  position: absolute;
+  top: 10px; /* distância do topo */
+  left: 10px; /* distância da esquerda */
+  width: 30px; /* largura da imagem */
+  height: 30px; /* altura da imagem */
+  border-radius: 50%; /* torna a imagem redonda */
+}
+
+.dash {
+  display: flex;
+  justify-content: center;
+  font-size: 60px;
+  font-weight: bold;
+  color: #34445c;
+}
+
+/* Media query para telas menores */
+@media (max-width: 768px) {
+    .cabecalho {
+        margin-left: 0;
+        text-align: center;
+    }
+
+    .quantidades-container {
+        margin-left: 0;
+        flex-direction: column; /* Empilha os cards verticalmente em telas menores */
+        align-items: center;
+    }
+
+    .card {
+        width: calc(100% - 40px); /* Ajusta a largura dos cards para caber na tela com margem */
+        height: auto; /* Ajusta a altura dos cards automaticamente */
+        padding: 20px; /* Ajusta o padding para telas menores */
+        margin: 10px; /* Ajusta a margem para telas menores */
+    }
+
+    .card h3 {
+        font-size: 18px; /* Reduz o tamanho da fonte para caber melhor em telas menores */
+    }
+
+    .card p {
+        font-size: 20px; /* Reduz o tamanho da fonte para caber melhor em telas menores */
+    }
+
+    .dash {
+        font-size: 40px; /* Reduz o tamanho da fonte para caber melhor em telas menores */
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 1000;
+    }
+
+    .sidebar.open {
+      transform: translateX(0);
+      z-index: 1000;
+    }
+
+
   
+
+}

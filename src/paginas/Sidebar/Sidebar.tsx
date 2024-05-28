@@ -1,94 +1,77 @@
+import { Link, useNavigate } from 'react-router-dom';
+import './Sidebar.css';
 
-import { Link, useNavigate } from 'react-router-dom'; // Importe o hook useNavigate do react-router-dom
-import './Sidebar.css'; // Import CSS file for styling
+const Sidebar = ({ isOpen }) => {
+  const navigate = useNavigate();
 
-const Sidebar = () => {
-  const navigate = useNavigate(); 
+  const closeSidebar = () => {
+    if (isOpen) {
+      document.body.classList.remove('sidebar-open');
+    }
+  };
 
-  const goToPaginaInicial = () => {
-    navigate('/');
-  }
-  const goToCadastroProduto = () => {
-    navigate('/CadastroProduto')
-  }
-  const goToCadastroFuncionario = () => {
-    navigate('/CadastroFuncionario')
-  }
-  const goToEntrada = () => {
-    navigate('/Entrada')
-  }
-  const goToSaida = () => {
-    navigate('/Saida')
-  }
-  const goToRelatorio = () => {
-    navigate('/Relatorio')
-  }
-  const goToQuantidadeProduto = () => {
-    navigate('/QuantidadeProduto')
-  }
-  const goToSobre = () => {
-    navigate('/Sobre')
-  }
+  const navigateTo = (path) => {
+    navigate(path);
+    closeSidebar();
+  };
 
   return (
-    <div className="sidebar">
+    <div className={`sidebar ${isOpen ? 'open' : ''}`}>
       <div className="logo">
-      <img src="img/ESTOQUE.png" alt="Logo" />
+        <img className='Logo' src="img/ESTOQUE.png" alt="Logo" />
       </div>
       <ul className="menu">
-        {/* Use o Link para navegar para a página inicial */}
         <li>
-          <Link to="/" onClick={goToPaginaInicial}>
+          <Link to="/" onClick={() => navigateTo('/')}>
             <img src="img/Homee.png" alt="PagInicial" />
             <span>Página Inicial</span>
           </Link>
         </li>
         <li>
-          <Link to="/CadastroProduto" onClick={goToCadastroProduto}>
+          <Link to="/CadastroProduto" onClick={() => navigateTo('/CadastroProduto')}>
             <img src="img/Produtoo.png" alt="CadProduto" />
             <span>Cadastro Produto</span>
           </Link>
         </li>
         <li>
-          <Link to="/CadastroFuncionario" onClick={goToCadastroFuncionario}>
+          <Link to="/CadastroFuncionario" onClick={() => navigateTo('/CadastroFuncionario')}>
             <img src="img/Funcionarioo.png" alt="CadFuncio" />
             <span>Cadastro Funcionário</span>
           </Link>
         </li>
         <li>
-          <Link to="/Entrada" onClick={goToEntrada}>
+          <Link to="/Entrada" onClick={() => navigateTo('/Entrada')}>
             <img src="img/Entradaa.png" alt="Entrada" />
             <span>Entrada</span>
           </Link>
         </li>
         <li>
-          <Link to="/Saida" onClick={goToSaida}>
+          <Link to="/Saida" onClick={() => navigateTo('/Saida')}>
             <img src="img/Saidaa.png" alt="Saida" />
             <span>Saída</span>
           </Link>
         </li>
         <li>
-          <Link to="/Relatorio" onClick={goToRelatorio}>
+          <Link to="/Relatorio" onClick={() => navigateTo('/Relatorio')}>
             <img src="img/Relatorioo.png" alt="Relatorio" />
             <span>Relatório</span>
           </Link>
         </li>
         <li>
-          <Link to="/QuantidadeProduto" onClick={goToQuantidadeProduto}>
+          <Link to="/QuantidadeProduto" onClick={() => navigateTo('/QuantidadeProduto')}>
             <img src="img/QuantidadeProduto.png" alt="QuantidadeProduto" />
-            <span>Saldo Estoque</span>
+            <span>Quantidade Produto</span>
           </Link>
         </li>
         <li>
-          <Link to='/Sobre' onClick={goToSobre}>
+          <Link to="/Sobre" onClick={() => navigateTo('/Sobre')}>
             <img src="img/Sobre.png" alt="Sobre" />
             <span>Sobre</span>
           </Link>
         </li>
-        
       </ul>
     </div>
   );
-}
+};
 
 export default Sidebar;

@@ -1,5 +1,5 @@
 import "./Saida.css"
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Sidebar from "../Sidebar/Sidebar";
 
@@ -18,6 +18,10 @@ function Saida() {
   const [produtos, setProdutos] = useState([]);
   const [funcionarios, setFuncionarios] = useState([]);
   const token = localStorage.getItem('token');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
 
   useEffect(() => {
     const axiosInstance = axios.create({
@@ -111,7 +115,10 @@ function Saida() {
 
   return (
     <div>
-      <Sidebar />
+      <button className="sidebar-toggle" onClick={toggleSidebar}>
+        ☰
+      </button>
+      <Sidebar isOpen={isSidebarOpen} />
       <div className="cabecalhoSaida">
         <h1 className="tituloSaida">Saída</h1>
       </div>
@@ -119,12 +126,12 @@ function Saida() {
         <form onSubmit={handleSubmit}>
           <div className="funcSaida">
             <div>
-              <label className="form-label"> Data Saída:</label>
-              <input onChange={handleChange} value={saida.dataSaida} name="dataSaida" type="date" className="form-control" />
+              <label className="form-labelSaida"> Data Saída:</label>
+              <input onChange={handleChange} value={saida.dataSaida} name="dataSaida" type="date" className="form-controlSaida" />
             </div>
             <div>
-              <label className="form-label">Funcionário:</label>
-              <select onChange={handleFuncionarioChange} value={saida.funcionario.nomeFuncionario} name="funcionario" className="form-control">
+              <label className="form-labelSaida">Funcionário:</label>
+              <select onChange={handleFuncionarioChange} value={saida.funcionario.nomeFuncionario} name="funcionario" className="form-controlSaida">
                 <option value="">Selecione um Funcionário</option>
                 {funcionarios.map(funcionario => (
                   <option key={funcionario.idFuncionario} value={funcionario.id}>{funcionario.nomeFuncionario}</option>
@@ -132,8 +139,8 @@ function Saida() {
               </select>
             </div>
             <div>
-              <label className="form-label">Produto:</label>
-              <select onChange={handleProdutoChange} value={saida.produto.nomeProduto} name="produto" className="form-control">
+              <label className="form-labelSaida">Produto:</label>
+              <select onChange={handleProdutoChange} value={saida.produto.nomeProduto} name="produto" className="form-controlSaida">
                 <option value="">Selecione um produto</option>
                 {produtos.map(produto => (
                   <option key={produto.idProduto} value={produto.id}>{produto.nomeProduto}</option>
@@ -141,26 +148,26 @@ function Saida() {
               </select>
             </div>
             <div>
-              <label className="form-label"> Quantidade Produto:</label>
-              <input onChange={handleChange} value={saida.quantidadeProduto} name="quantidadeProduto" type="number" className="form-control" />
+              <label className="form-labelSaida"> Quantidade Produto:</label>
+              <input onChange={handleChange} value={saida.quantidadeProduto} name="quantidadeProduto" type="number" className="form-controlSaida" />
             </div>
             <div>
-              <label className="form-label"> Tipo:</label>
-              <input onChange={handleChange} value={saida.tipo} name="tipo" type="text" className="form-control" />
+              <label className="form-labelSaida"> Tipo:</label>
+              <input onChange={handleChange} value={saida.tipo} name="tipo" type="text" className="form-controlSaida" />
             </div>
 
             <br />
-            <input type="submit" className="btn btn-success" style={{ marginLeft: "230px" }} value="Cadastrar"></input>
+            <input type="submit" className="btn btn-success btn-saida" value="Cadastrar"></input>
           </div>
         </form>
-        <hr className="linha"></hr>
-        <table className="table" style={{ marginLeft: "230px" }}>
+        <hr className="linhaSaida"></hr>
+        <table className="tableSaida">
           <thead>
             <tr>
               <th scope="col">Data Saida</th>
               <th scope="col">Funcionario</th>
               <th scope="col">Produto</th>
-              <th scope="col">Quantidade Produto</th>
+              <th scope="col">Qntd. Produto</th>
               <th scope="col">Tipo</th>
               <th scope="col">Valor Total</th>
               <th scope="col">Opções</th>

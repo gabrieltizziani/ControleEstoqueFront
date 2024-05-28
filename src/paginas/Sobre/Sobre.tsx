@@ -1,11 +1,20 @@
 // Sobre.jsx
 import Sidebar from "../Sidebar/Sidebar";
+import  { useState } from 'react';
 import "./Sobre.css";
 
 const Sobre = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   return (
     <div className="bodyS">
-      <Sidebar/>
+      <button className="sidebar-toggle" onClick={toggleSidebar}>
+        ☰
+      </button>
+      <Sidebar isOpen={isSidebarOpen} />
         <div>
             <h1 className="titulo">Bem Vindo ao Controle de Estoque</h1>
             <p className="bemvindo">Bem-vindo ao nosso aplicativo de controle de estoque! Estamos felizes por você estar aqui. Com nossa ferramenta, você terá o poder de gerenciar seu estoque de forma eficiente, mantendo tudo organizado e sob controle. Seja você um pequeno empresário ou parte de uma grande empresa, estamos aqui para simplificar sua vida e ajudá-lo a alcançar seus objetivos. Explore todas as funcionalidades e não hesite em nos contatar caso precise de suporte. Estamos ansiosos para ajudá-lo a impulsionar seu negócio para o sucesso!</p>

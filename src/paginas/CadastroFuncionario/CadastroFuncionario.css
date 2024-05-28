@@ -6,11 +6,27 @@
    
   }
 
-.tituloCP{
+.tituloCF{
     font-size: 70px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
+    color: #34445c;
   }
+
+
+.btn {
+  margin-left: 20px;
+  width: 150px;
+  font-weight: bold;
+}
+
+.linhaCF{
+  margin-left: 210px;
+}
+
+.btn-cf{
+  margin-left: 230px;
+}
 
 
 
@@ -20,30 +36,103 @@
     
   }
   
-  .form-label {
+  .form-labelCF {
     font-size: 18px;
     color: #000000;
     margin-bottom: 5px;
     display: block;
-    margin-left: 50px;
+    margin-left: 230px;
     font-weight: bold;
     
   }
   
-  .form-control {
-    width: 50%;
+  .form-controlCF {
+    width: 15%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
     font-size: 17px;
-    margin-left: 50px;
+    margin-left: 230px;
   }
   
   .form-control:focus {
     border-color: #007bff;
     
   }
+
+  .tableCF {
+    border-collapse: collapse;
+    width: 90%;
+    margin-left: 230px;
+  }
+  
+  .tableCF th,
+  .tableCF td {
+    padding: 5px; /* Ajuste o valor conforme necessário */
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .tableCF th {
+    background-color: #f2f2f2;
+    color: rgb(0, 0, 0);
+  }
+
+  @media (max-width: 768px) {
+    .tituloCF {
+      font-size: 33px;
+      padding-top: 60px;
+    }
+
+    .tableCF {
+      border-collapse: collapse;
+      width: 80%;
+      margin-left: 10px;
+    }
+    
+    .tableCF th,
+    .tableCF td {
+      padding: 5px; /* Ajuste o valor conforme necessário */
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    
+    .tableCF th {
+      background-color: #f2f2f2;
+      color: rgb(0, 0, 0);
+    }
+
+    .form-labelCF {
+      font-size: 15px;
+      color: #000000;
+      margin-bottom: 5px;
+      display: block;
+      margin-left: 20px;
+      font-weight: bold;
+      
+    }
+    
+    .form-controlCF {
+      width: 50%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+      font-size: 17px;
+      margin-left: 20px;
+    }
+    
+    .linhaCF{
+      margin-left: 0px;
+    }
+
+    .btn-cf{
+      margin-left: 20px;
+    }
+
+  }
+
 
 
 

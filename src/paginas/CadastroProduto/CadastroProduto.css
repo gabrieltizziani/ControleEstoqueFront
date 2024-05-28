@@ -7,9 +7,13 @@
 }
 
 .tituloCP{
+    font-size: 70px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     color: #34445c;
+    align-items: center;
+    justify-content: center;
+    display: flex;
 }
 
 .divBotao{
@@ -24,30 +28,107 @@
    
   }
   
-  .form-label {
+  .form-labelCD {
     font-size: 18px;
     color: #000000;
     margin-bottom: 5px;
     display: block;
-    margin-left: 50px;
+    margin-left: 230px;
     font-weight: bold;
     
   }
   
-  .form-control {
-    width: 50%;
+  .form-controlCD {
+    width: 15%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
     font-size: 17px;
-    margin-left: 50px;
+    margin-left: 230px;
   }
   
   .form-control:focus {
     border-color: #007bff;
     
   }
+
+  .tableCD {
+    border-collapse: collapse;
+    width: 90%;
+    margin-left: 230px;
+  }
+  
+  .tableCD th,
+  .tableCD td {
+    padding: 5px; /* Ajuste o valor conforme necessário */
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .tableCD th {
+    background-color: #f2f2f2;
+    color: rgb(0, 0, 0);
+  }
+
+  .linhaCD{
+    margin-left: 210px;
+  }
+  
+
+  @media (max-width: 768px) {
+    .tituloCP{
+      font-size: 33px;
+      padding-top: 60px;
+    }
+
+    .tableCD {
+      border-collapse: collapse;
+      width: 80%;
+      margin-left: 10px;
+    }
+    
+    .tableCD th,
+    .tableCD td {
+      padding: 5px; /* Ajuste o valor conforme necessário */
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    
+    .tableCD th {
+      background-color: #f2f2f2;
+      color: rgb(0, 0, 0);
+    }
+
+    .form-labelCD {
+      font-size: 18px;
+      color: #000000;
+      margin-bottom: 5px;
+      display: block;
+      margin-left: 20px;
+      font-weight: bold;
+      
+    }
+    
+    .form-controlCD {
+      width: 50%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+      font-size: 17px;
+      margin-left: 20px;
+    }
+    
+    .linhaCD{
+      margin-left: 0px;
+    }
+
+  }
+
+ 
+
+ 
 
  
   

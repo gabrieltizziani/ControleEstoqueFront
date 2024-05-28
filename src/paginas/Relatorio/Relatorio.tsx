@@ -10,6 +10,10 @@ function Relatorio() {
   const [funcionarioSelecionado, setFuncionarioSelecionado] = useState("");
   const [funcionarios, setFuncionarios] = useState([]);
   const token = localStorage.getItem('token');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
 
   useEffect(() => {
     const fetchFuncionarios = async () => {
@@ -73,7 +77,10 @@ function Relatorio() {
 
   return (
     <div>
-      <Sidebar />
+      <button className="sidebar-toggle" onClick={toggleSidebar}>
+        ☰
+      </button>
+      <Sidebar isOpen={isSidebarOpen} />
       <div className="cabecalhoRelatorio">
         <h1 className="tituloRelatorio">Relatório</h1>
       </div>
@@ -81,15 +88,15 @@ function Relatorio() {
         <form onSubmit={handleSubmit}>
           <div className="funcRelatorio">
             <div>
-              <label className="form-label"> Data Inicial:</label>
-              <input name="dataInicial" type="date" className="form-control" style={{ marginLeft: "50px" }}/>
+              <label className="form-labelRel"> Data Inicial:</label>
+              <input name="dataInicial" type="date" className="form-controlI" />
             </div>
             <div>
-              <label className="form-label"> Data Final:</label>
-              <input name="dataFinal" type="date" className="form-control" style={{ marginLeft: "60px" }} />
+              <label className="form-labelRel"> Data Final:</label>
+              <input name="dataFinal" type="date" className="form-controlF" />
             </div>
             <div>
-              <label className="form-label"> Tipo: </label>
+              <label className="form-labelRel"> Tipo: </label>
               <div>
                 <input type="radio" id="entrada" name="tipo" value="entrada" className="form-check-input" style={{ marginLeft: "40px" }}/>
                 <label htmlFor="entrada" className="form-check-label">
@@ -105,7 +112,7 @@ function Relatorio() {
             </div>
             {tipoRelatorio === "saida" && (
               <div>
-                <label className="form-label"> Funcionário: </label>
+                <label className="form-labelRel"> Funcionário: </label>
                 <select name="funcionario" className="form-control" onChange={handleFuncionarioChange}>
                   <option value="">Todos</option>
                   {funcionarios.map(funcionario => (
@@ -116,10 +123,10 @@ function Relatorio() {
             )}
 
             <br />
-            <input type="submit" className="btn btn-success" style={{ marginLeft: "260px" }} value="Gerar Relatório" />
+            <input type="submit" className="btn btn-success btn-relatorio"  value="Gerar Relatório" />
           </div>
         </form>
-        <hr style={{ marginLeft: "250px" }}/>
+        <hr className="linhaRel"/>
 
         {tipoRelatorio && relatorio.length > 0 && (
           <div className="relatorio">
@@ -132,7 +139,7 @@ function Relatorio() {
                     <>
                       <th scope="col">Data Entrada</th>
                       <th scope="col">Produto</th>
-                      <th scope="col">Quantidade Produto</th>
+                      <th scope="col">Qntd. Produto</th>
                       <th scope="col">Tipo</th>
                       <th scope="col">Fornecedor</th>
                       <th scope="col">Nota Fiscal</th>
@@ -143,7 +150,7 @@ function Relatorio() {
                       <th scope="col">Data Saída</th>
                       <th scope="col">Funcionário</th>
                       <th scope="col">Produto</th>
-                      <th scope="col">Quantidade Produto</th>
+                      <th scope="col">Qntd. Produto</th>
                       <th scope="col">Tipo</th>
                       <th scope="col">Valor Total</th>
                     </>

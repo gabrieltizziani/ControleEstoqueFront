@@ -1,39 +1,58 @@
-.bodyS{
+/* Sobre.css */
+
+.bodyS {
     background-color: #bbc2cc;
-    margin-left: 250px;
-}
-.titulo{
+    margin-left: 210px; /* Margem esquerda para a barra lateral */
+    padding-left: 0; /* Remova o preenchimento à esquerda para evitar sobreposição com a barra lateral */
+  }
+  
+  .titulo {
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
     font-size: 40px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
-}
-
-.bemvindo{
-    margin-left: 50px;
-    margin-right: 50px;
-}
-
-.regras{
-    margin-left: 50px;
-    margin-right: 50px;
-}
-
-.regraFuncio{
-    margin-left: 50px;
-    margin-right: 50px;
-}
-
-.contato{
-    margin-left: 50px;
-    margin-right: 50px;
-}
-
-.contatoqr{
-    width: 150px;
-}
-
-.subTitulo{
+  }
+  
+  .bemvindo,
+  .regras,
+  .regraFuncio,
+  .contato {
+    margin-left: 50px; /* Margem esquerda */
+    margin-right: 50px; /* Margem direita */
+  }
+  
+  .contatoqr {
+    width: 150px; /* Largura do QR Code */
+  }
+  
+  .subTitulo {
     font-weight: bold;
-}
+  }
+  
+  /* Media query para telas menores */
+  @media (max-width: 768px) {
+    .bodyS {
+      margin-left: 0; /* Remova a margem esquerda para evitar sobreposição com a barra lateral */
+      padding-left: 0; /* Remova o preenchimento à esquerda para evitar sobreposição com a barra lateral */
+    }
+  
+    .titulo {
+      font-size: 30px; /* Reduza o tamanho do título em dispositivos móveis */
+      padding-top: 60px;
+    }
+  
+    .bemvindo,
+    .regras,
+    .regraFuncio,
+    .contato {
+      margin-left: 20px; /* Reduza a margem esquerda para dispositivos móveis */
+      margin-right: 20px; /* Reduza a margem direita para dispositivos móveis */
+    }
+  
+    .contatoqr {
+      width: 100px; /* Reduza a largura do QR Code para dispositivos móveis */
+    }
+  }
+  

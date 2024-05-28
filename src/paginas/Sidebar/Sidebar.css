@@ -1,40 +1,70 @@
 .sidebar {
-    width: 224px;
-    height: 100%;
-    background-color: #34445c;
-    position: fixed;
-    top: 0;
-    left: 0;
-    
-  }
-  
-  .logo {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .menu {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
+  width: 210px;
+  height: 100%;
+  background-color: #34445c;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(0);
+}
 
-  
-  .menu a {
+.sidebar.hidden {
+  transform: translateX(-100%);
+}
+
+.sidebar-toggle {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+      transform: translateX(-100%);
+  }
+
+  .sidebar-toggle {
     display: block;
-    color: #fff;
-    text-decoration: none;
-    padding: 10px;
+    position: fixed;
+    top: 15px; /* Ajuste a posição vertical conforme necessário */
+    left: 15px; /* Ajuste a posição horizontal conforme necessário */
+    background-color: transparent; /* Fundo transparente */
+    color: #000000;
+    border: none;
+    width: 25px; /* Definir largura */
+    height: 20px; /* Definir altura */
+    padding: 0; /* Remover padding para garantir que o tamanho seja exato */
+    font-size: 16px; /* Ajuste o tamanho do ícone */
+    cursor: pointer;
+    z-index: 1100; /* Certifique-se de que o botão esteja na frente da sidebar */
   }
-  
-  .menu a:hover {
-    background-color: #555555;
+
+  .sidebar.open {
+      transform: translateX(0);
   }
-  
-  .sobre{
-    background-color: #34445c;
-    border: 0;
-    color: #ffffff;
-    margin-left: 10px;
-  }
+}
+
+.logo {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  padding: 8px;
+}
+
+.menu a:hover {
+  background-color: #555555;
+}
+
+span {
+  font-size: 15px;
+}

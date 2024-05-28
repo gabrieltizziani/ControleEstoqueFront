@@ -8,6 +8,10 @@ function CadastroProduto(){
   const [cadastrosProdutos, setCadastrosProdutos] = useState ([]);
   const [atualizar, setAtualizar] = useState();
   const token = localStorage.getItem('token'); // Armazene o token em uma variável
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const toggleSidebar = () => {
+      setIsSidebarOpen(!isSidebarOpen);
+    };
 
   useEffect(()=>{
     const axiosInstance = axios.create({
@@ -87,7 +91,10 @@ function CadastroProduto(){
 
   return (
     <div>
-      <Sidebar/>
+      <button className="sidebar-toggle" onClick={toggleSidebar}>
+        ☰
+      </button>
+      <Sidebar isOpen={isSidebarOpen} />
       <div className="cabecalhoCP">
         <h1 className="tituloCP">Cadastro de Produto</h1>
       </div>
@@ -95,41 +102,41 @@ function CadastroProduto(){
         <form onSubmit={handleSubmit}>
           <div className="funcProduto">
             <div>
-                <label className="form-label"> Nome do Produto:</label>
-                <input onChange={handleChange} value={cadastroProduto.nomeProduto} name="nomeProduto" type="text" className="form-control"/>
+                <label className="form-labelCD"> Nome do Produto:</label>
+                <input onChange={handleChange} value={cadastroProduto.nomeProduto} name="nomeProduto" type="text" className="form-controlCD"/>
             </div>
             <div>
-            <label className="form-label"> Preço Produto:</label>
-                <input onChange={handleChange} value={cadastroProduto.precoProduto} name="precoProduto" type="number" className="form-control"/>
+            <label className="form-labelCD"> Preço Produto:</label>
+                <input onChange={handleChange} value={cadastroProduto.precoProduto} name="precoProduto" type="number" className="form-controlCD"/>
             </div>
             <br/>
-            <input type="submit" className="btn btn-success" style={{ marginLeft: "260px" }} value="Cadastrar"></input>
+            <input type="submit" className="btn btn-success" style={{ marginLeft: "230px" }} value="Cadastrar"></input>
           </div>
         </form>
-        <hr className="linha"></hr>
-        <table className="table" style={{ marginLeft: "250px" }}>
-  <thead>
-    <tr>
-      <th scope="col">Nome Produto</th>
-      <th scope="col">Preço Produto</th>
-      <th scope="col">Opções</th>
+        <hr className="linhaCD"></hr>
+        <table className="tableCD" >
+          <thead>
+            <tr>
+              <th scope="col">Nome Produto</th>
+              <th scope="col">Preço Produto</th>
+              <th scope="col">Opções</th>
 
-    </tr>
-  </thead>
-  <tbody>
-    {cadastrosProdutos.map(produto => (
-        <tr key={produto.idProduto}>
-          <td>{produto.nomeProduto}</td>
-          <td>{"R$ " + produto.precoProduto}</td>
-          <td>
-          <button onClick={()=> setCadastroProduto (produto)} className="btn btn-warning">Alterar Valor</button>
-          <button onClick={() => excluirProduto(produto.idProduto)} className="btn btn-danger">Excluir</button>
-          </td>    
-        </tr>
-    ))}
-    
-  </tbody>
-</table>
+            </tr>
+          </thead>
+          <tbody>
+            {cadastrosProdutos.map(produto => (
+                <tr key={produto.idProduto}>
+                  <td>{produto.nomeProduto}</td>
+                  <td>{"R$ " + produto.precoProduto}</td>
+                  <td>
+                  <button onClick={()=> setCadastroProduto (produto)} className="btn btn-warning">Alterar Valor</button>
+                  <button onClick={() => excluirProduto(produto.idProduto)} className="btn btn-danger">Excluir</button>
+                  </td>    
+                </tr>
+            ))}
+            
+          </tbody>
+        </table>
       </div>
       
     </div>

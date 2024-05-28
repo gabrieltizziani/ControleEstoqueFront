@@ -27,26 +27,35 @@
 
 } 
   
-.form-label {
+.form-labelRel {
     font-size: 18px;
     color: #000000;
     margin-bottom: 5px;
     display: block;
-    margin-left: 50px;
+    margin-left: 230px;
     font-weight: bold;
 
 }
   
-.form-control {
+.form-controlI {
     width: 15%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
     font-size: 17px;
-    margin-left: ;
+    margin-left: 50px;
 }
 
+.form-controlF {
+    width: 15%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 17px;
+    margin-left: 60px;
+}
 
 
 .form-check-label{
@@ -61,11 +70,7 @@
     
 }
 
-.btn {
-    margin-left: 50px;
-    width: 170px;
-    font-weight: bold;
-}
+
 
 .resultadoRelatorio{
     margin-left: 260px;
@@ -75,7 +80,7 @@
 .tableR {
     border-collapse: collapse;
     width: 70%;
-    margin-left: 250px;
+    margin-left: 150px;
   }
   
   .tableR th,
@@ -93,4 +98,83 @@
 .relatorio{
     margin-left: 260px;
 }
+
+.linhaRel{
+    margin-left: 210px;
+}
+
+.btn-relatorio{
+    margin-left: 230px;
+}
+
+@media (max-width: 768px) {
+    .tituloRelatorio{
+      font-size: 33px;
+      padding-top: 60px;
+    }
+  
+    .tableR {
+      border-collapse: collapse;
+      width: 100%;
+      margin-left: 10px;
+    }
+    
+    .tableR th,
+    .tableR td {
+      padding: 5px; /* Ajuste o valor conforme necessário */
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    
+    .tableR th {
+      background-color: #f2f2f2;
+      color: rgb(0, 0, 0);
+    }
+  
+    .form-labelRel{
+      font-size: 18px;
+      color: #000000;
+      margin-bottom: 5px;
+      display: block;
+      margin-left: 20px;
+      font-weight: bold;
+      
+    }
+    
+    .form-controlF {
+      width: 50%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+      font-size: 17px;
+      margin-left: 20px;
+    }
+    .form-controlI {
+        width: 50%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: 17px;
+        margin-left: 20px;
+      }
+    
+    .linhaRel{
+      margin-left: 0px;
+    }
+  
+    .btn-relatorio{
+      margin-left: 20px;
+    }
+
+    .tableR tr{
+        margin-left: 10px;
+    }
+
+    .relatorio{
+        margin-left:10px;
+    }
+  
+  }
   
