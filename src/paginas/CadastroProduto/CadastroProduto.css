@@ -39,7 +39,17 @@
   }
   
   .form-controlCD {
-    width: 15%;
+    width: 10%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 17px;
+    margin-left: 230px;
+  }
+
+  .form-controlCDN {
+    width: 20%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -111,6 +121,16 @@
     }
     
     .form-controlCD {
+      width: 50%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+      font-size: 17px;
+      margin-left: 20px;
+    }
+
+    .form-controlCDN {
       width: 50%;
       padding: 10px;
       border: 1px solid #ccc;

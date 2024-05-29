@@ -75,6 +75,7 @@ function Saida() {
     axiosInstance.post("/saida", saida).then(result => {
       setAtualizar(result);
       alert('Saída realizada com sucesso!');
+      limpar();
     }).catch(error => {
       console.error('Erro ao realizar saída:', error);
       alert('Erro ao realizar a saída. Verifique se todos os espaços estão preenchidos.');
@@ -112,6 +113,18 @@ function Saida() {
       funcionario: { nomeFuncionario: event.target.value }
     }));
   }
+
+  function limpar() {
+    setSaida({
+      dataSaida: "",
+      funcionario: { nomeFuncionario: "" },
+      produto: { nomeProduto: "" },
+      quantidadeProduto: "",
+      tipo: "",
+      valorTotal: ""
+    });
+  }
+
 
   return (
     <div>

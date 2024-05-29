@@ -60,6 +60,7 @@ function Entrada() {
     axiosInstance.post('/entrada', entrada).then(result => {
       setAtualizar(result);
       alert('Entrada realizada com sucesso!');
+      limpar();
     }).catch(error => {
       console.error('Erro ao realizar entrada:', error);
       alert('Erro ao realizar a entrada. Verifique se todos os espaços estão preenchidos.');
@@ -89,6 +90,18 @@ function Entrada() {
       ...prevState,
       produto: { nomeProduto: value }
     }));
+  }
+
+  function limpar() {
+    setEntrada({
+      dataEntrada: '',
+      produto: { nomeProduto: '' },
+      quantidadeProdutoEntrada: '',
+      tipo: '',
+      fornecedor: '',
+      notaFiscal: '',
+      valorTotal: ''
+    });
   }
 
   return (

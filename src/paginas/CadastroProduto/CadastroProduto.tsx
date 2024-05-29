@@ -1,19 +1,19 @@
 import './CadastroProduto.css';
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Sidebar from "../Sidebar/Sidebar";
 
-function CadastroProduto(){
-  const [cadastroProduto, setCadastroProduto] = useState({nomeProduto: "", precoProduto: ""});
-  const [cadastrosProdutos, setCadastrosProdutos] = useState ([]);
+function CadastroProduto() {
+  const [cadastroProduto, setCadastroProduto] = useState({ nomeProduto: "", precoProduto: "" });
+  const [cadastrosProdutos, setCadastrosProdutos] = useState([]);
   const [atualizar, setAtualizar] = useState();
   const token = localStorage.getItem('token'); // Armazene o token em uma variável
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const toggleSidebar = () => {
-      setIsSidebarOpen(!isSidebarOpen);
-    };
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
 
-  useEffect(()=>{
+  useEffect(() => {
     const axiosInstance = axios.create({
       baseURL: 'http://localhost:8080',
       headers: {
@@ -21,16 +21,16 @@ function CadastroProduto(){
       }
     });
 
-    axiosInstance.get("/produtos").then(result =>{
+    axiosInstance.get("/produtos").then(result => {
       setCadastrosProdutos(result.data);
-    })
-  },[atualizar])
+    });
+  }, [atualizar]);
 
-  function handleChange(event){
-    setCadastroProduto({...cadastroProduto,[event.target.name]:event.target.value})
+  function handleChange(event) {
+    setCadastroProduto({ ...cadastroProduto, [event.target.name]: event.target.value });
   }
 
-  function handleSubmit(event){
+  function handleSubmit(event) {
     event.preventDefault();
     const axiosInstance = axios.create({
       baseURL: 'http://localhost:8080',
@@ -39,18 +39,18 @@ function CadastroProduto(){
       }
     });
 
-    axiosInstance.post("/produtos", cadastroProduto).then(result=>{
-      setAtualizar(result) ;
+    axiosInstance.post("/produtos", cadastroProduto).then(result => {
+      setAtualizar(result);
       alert('Produto cadastrado com sucesso!');
+      limpar(); // Chama a função limpar após o cadastro
     })
     .catch(error => {
       console.error('Erro ao cadastrar produto:', error);
       alert('Erro ao cadastrar o produto. Produto com o nome já cadastrado.');
     });
-
   }
 
-  function editar (produto){
+  function editar(produto) {
     const axiosInstance = axios.create({
       baseURL: 'http://localhost:8080',
       headers: {
@@ -58,11 +58,11 @@ function CadastroProduto(){
       }
     });
 
-    axiosInstance.put("/produtos/", cadastroProduto).then(result=>{
-      setAtualizar(result) ;
+    axiosInstance.put("/produtos/", cadastroProduto).then(result => {
+      setAtualizar(result);
       alert('Produto alterado com sucesso!');
       limpar();
-    })
+    });
   }
 
   function excluirProduto(idProduto) {
@@ -82,10 +82,10 @@ function CadastroProduto(){
     });
   }
 
-  function limpar(){
+  function limpar() {
     setCadastroProduto({
-      nomeProduto: " ", 
-      precoProduto: " "
+      nomeProduto: "",
+      precoProduto: ""
     });
   }
 
@@ -102,14 +102,14 @@ function CadastroProduto(){
         <form onSubmit={handleSubmit}>
           <div className="funcProduto">
             <div>
-                <label className="form-labelCD"> Nome do Produto:</label>
-                <input onChange={handleChange} value={cadastroProduto.nomeProduto} name="nomeProduto" type="text" className="form-controlCD"/>
+              <label className="form-labelCD"> Nome do Produto:</label>
+              <input onChange={handleChange} value={cadastroProduto.nomeProduto} name="nomeProduto" type="text" className="form-controlCDN" />
             </div>
             <div>
-            <label className="form-labelCD"> Preço Produto:</label>
-                <input onChange={handleChange} value={cadastroProduto.precoProduto} name="precoProduto" type="number" className="form-controlCD"/>
+              <label className="form-labelCD"> Preço Produto:</label>
+              <input onChange={handleChange} value={cadastroProduto.precoProduto} name="precoProduto" type="number" className="form-controlCD" />
             </div>
-            <br/>
+            <br />
             <input type="submit" className="btn btn-success" style={{ marginLeft: "230px" }} value="Cadastrar"></input>
           </div>
         </form>
@@ -120,25 +120,22 @@ function CadastroProduto(){
               <th scope="col">Nome Produto</th>
               <th scope="col">Preço Produto</th>
               <th scope="col">Opções</th>
-
             </tr>
           </thead>
           <tbody>
             {cadastrosProdutos.map(produto => (
-                <tr key={produto.idProduto}>
-                  <td>{produto.nomeProduto}</td>
-                  <td>{"R$ " + produto.precoProduto}</td>
-                  <td>
-                  <button onClick={()=> setCadastroProduto (produto)} className="btn btn-warning">Alterar Valor</button>
+              <tr key={produto.idProduto}>
+                <td>{produto.nomeProduto}</td>
+                <td>{"R$ " + produto.precoProduto}</td>
+                <td>
+                  <button onClick={() => setCadastroProduto(produto)} className="btn btn-warning">Alterar Valor</button>
                   <button onClick={() => excluirProduto(produto.idProduto)} className="btn btn-danger">Excluir</button>
-                  </td>    
-                </tr>
+                </td>
+              </tr>
             ))}
-            
           </tbody>
         </table>
       </div>
-      
     </div>
   );
 }

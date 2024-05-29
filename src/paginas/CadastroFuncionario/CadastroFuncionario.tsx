@@ -42,6 +42,7 @@ function CadastroFuncionario(){
     axiosInstance.post('/funcionarios', cadastroFuncionario).then(result => {
       setAtualizar(result);
       alert('Funcionário cadastrado com sucesso!');
+      limpar();
     }).catch(error => {
       console.error('Erro ao cadastrar funcionário:', error);
       alert('Erro ao cadastrar o funcionário. Funcionário com o nome já cadastrado ou está faltando informação.');
@@ -62,6 +63,14 @@ function CadastroFuncionario(){
     }).catch(error => {
       console.error('Erro ao excluir funcionário:', error);
       alert('Erro ao excluir o funcionário. Verifique se ele está sendo usado em entradas ou saídas.');
+    });
+  }
+
+  function limpar() {
+    setCadastroFuncionario({
+      nomeFuncionario: "",
+      numeroFuncionario: "",
+      funcaoFuncionario: ""
     });
   }
   
