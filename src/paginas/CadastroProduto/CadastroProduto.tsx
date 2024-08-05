@@ -1,75 +1,70 @@
-import './CadastroProduto.css';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Sidebar from "../Sidebar/Sidebar";
+import './CadastroProduto.css';
+
+interface Produto {
+  idProduto: number;
+  nomeProduto: string;
+  precoProduto: number; // Alteração aqui: mudança para tipo number
+}
 
 function CadastroProduto() {
-  const [cadastroProduto, setCadastroProduto] = useState({ nomeProduto: "", precoProduto: "" });
-  const [cadastrosProdutos, setCadastrosProdutos] = useState([]);
-  const [atualizar, setAtualizar] = useState();
-  const token = localStorage.getItem('token'); // Armazene o token em uma variável
+  const [cadastroProduto, setCadastroProduto] = useState<Produto>({ idProduto: 0, nomeProduto: "", precoProduto: 0 }); // Alteração aqui: valor inicial 0
+  const [cadastrosProdutos, setCadastrosProdutos] = useState<Produto[]>([]);
+  const [atualizar, setAtualizar] = useState<any>();
+  const token = localStorage.getItem('token') || '';
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
   useEffect(() => {
     const axiosInstance = axios.create({
-      baseURL: 'http://localhost:8080',
+      baseURL: 'http://13.58.105.88:8080',
       headers: {
-        Authorization: `Bearer ${token}` // Inclua o token no cabeçalho
+        Authorization: `Bearer ${token}`
       }
     });
 
     axiosInstance.get("/produtos").then(result => {
       setCadastrosProdutos(result.data);
     });
-  }, [atualizar]);
+  }, [atualizar, token]);
 
-  function handleChange(event) {
-    setCadastroProduto({ ...cadastroProduto, [event.target.name]: event.target.value });
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const { name, value } = event.target;
+    setCadastroProduto(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
   }
 
-  function handleSubmit(event) {
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const axiosInstance = axios.create({
-      baseURL: 'http://localhost:8080',
+      baseURL: 'http://13.58.105.88:8080',
       headers: {
-        Authorization: `Bearer ${token}` // Inclua o token no cabeçalho
+        Authorization: `Bearer ${token}`
       }
     });
 
     axiosInstance.post("/produtos", cadastroProduto).then(result => {
       setAtualizar(result);
       alert('Produto cadastrado com sucesso!');
-      limpar(); // Chama a função limpar após o cadastro
-    })
-    .catch(error => {
+      limpar();
+    }).catch(error => {
       console.error('Erro ao cadastrar produto:', error);
       alert('Erro ao cadastrar o produto. Produto com o nome já cadastrado.');
     });
   }
 
-  function editar(produto) {
+  function excluirProduto(idProduto: number) {
     const axiosInstance = axios.create({
-      baseURL: 'http://localhost:8080',
+      baseURL: 'http://13.58.105.88:8080',
       headers: {
-        Authorization: `Bearer ${token}` // Inclua o token no cabeçalho
-      }
-    });
-
-    axiosInstance.put("/produtos/", cadastroProduto).then(result => {
-      setAtualizar(result);
-      alert('Produto alterado com sucesso!');
-      limpar();
-    });
-  }
-
-  function excluirProduto(idProduto) {
-    const axiosInstance = axios.create({
-      baseURL: 'http://localhost:8080',
-      headers: {
-        Authorization: `Bearer ${token}` // Inclua o token no cabeçalho
+        Authorization: `Bearer ${token}`
       }
     });
 
@@ -84,8 +79,9 @@ function CadastroProduto() {
 
   function limpar() {
     setCadastroProduto({
+      idProduto: 0,
       nomeProduto: "",
-      precoProduto: ""
+      precoProduto: 0 // Alteração aqui: valor inicial 0
     });
   }
 
@@ -107,7 +103,7 @@ function CadastroProduto() {
             </div>
             <div>
               <label className="form-labelCD"> Preço Produto:</label>
-              <input onChange={handleChange} value={cadastroProduto.precoProduto} name="precoProduto" type="number" className="form-controlCD" />
+              <input onChange={handleChange} value={cadastroProduto.precoProduto} name="precoProduto" type="number" step="0.01" className="form-controlCD" /> {/* Alteração aqui: step="0.01" para permitir números decimais */}
             </div>
             <br />
             <input type="submit" className="btn btn-success" style={{ marginLeft: "230px" }} value="Cadastrar"></input>
@@ -126,7 +122,7 @@ function CadastroProduto() {
             {cadastrosProdutos.map(produto => (
               <tr key={produto.idProduto}>
                 <td>{produto.nomeProduto}</td>
-                <td>{"R$ " + produto.precoProduto}</td>
+                <td>{"R$ " + produto.precoProduto.toFixed(2)}</td> {/* Alteração aqui: formatar para duas casas decimais */}
                 <td>
                   <button onClick={() => setCadastroProduto(produto)} className="btn btn-warning">Alterar Valor</button>
                   <button onClick={() => excluirProduto(produto.idProduto)} className="btn btn-danger">Excluir</button>

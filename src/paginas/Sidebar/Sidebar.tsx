@@ -1,7 +1,12 @@
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Sidebar.css';
 
-const Sidebar = ({ isOpen }) => {
+interface SidebarProps {
+  isOpen: boolean;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
   const navigate = useNavigate();
 
   const closeSidebar = () => {
@@ -10,7 +15,7 @@ const Sidebar = ({ isOpen }) => {
     }
   };
 
-  const navigateTo = (path) => {
+  const navigateTo = (path: string) => {
     navigate(path);
     closeSidebar();
   };

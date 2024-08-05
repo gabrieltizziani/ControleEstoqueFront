@@ -3,7 +3,7 @@ import axios from 'axios';
 import './Login.css'; // Import the CSS file
 
 interface LoginFormProps {
-  setToken: React.Dispatch<React.SetStateAction<string>>;
+  setToken: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({ setToken }) => {
@@ -13,7 +13,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ setToken }) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/auth/login', {
+      const response = await axios.post('http://13.58.105.88:8080/auth/login', {
         email,
         password,
       });

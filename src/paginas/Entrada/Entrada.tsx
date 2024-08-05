@@ -1,23 +1,39 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Sidebar from '../Sidebar/Sidebar';
-import './Entrada.css'
+import './Entrada.css';
+
+interface Produto {
+  idProduto: number;
+  nomeProduto: string;
+}
+
+interface Entrada {
+  idEntrada?: number;
+  dataEntrada: string;
+  produto: { nomeProduto: string };
+  quantidadeProdutoEntrada: number;
+  tipo: string;
+  fornecedor: string;
+  notaFiscal: string;
+  valorTotal: string;
+}
 
 function Entrada() {
-  const [entrada, setEntrada] = useState({
+  const [entrada, setEntrada] = useState<Entrada>({
     dataEntrada: '',
     produto: { nomeProduto: '' },
-    quantidadeProdutoEntrada: '',
+    quantidadeProdutoEntrada: 0,
     tipo: '',
     fornecedor: '',
     notaFiscal: '',
     valorTotal: ''
   });
 
-  const [entradas, setEntradas] = useState([]);
-  const [atualizar, setAtualizar] = useState();
-  const [produtos, setProdutos] = useState([]);
-  const token = localStorage.getItem('token');
+  const [entradas, setEntradas] = useState<Entrada[]>([]);
+  const [atualizar, setAtualizar] = useState<any>();
+  const [produtos, setProdutos] = useState<Produto[]>([]);
+  const token = localStorage.getItem('token') || '';
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -25,22 +41,22 @@ function Entrada() {
 
   useEffect(() => {
     const axiosInstance = axios.create({
-      baseURL: 'http://localhost:8080',
+      baseURL: 'http://13.58.105.88:8080',
       headers: {
         Authorization: `Bearer ${token}`
       }
     });
 
-    axiosInstance.get('/entrada').then(result => {
+    axiosInstance.get('/entrada').then((result: { data: Entrada[] }) => {
       setEntradas(result.data);
     });
 
-    axiosInstance.get('/produtos').then(result => {
+    axiosInstance.get('/produtos').then((result: { data: Produto[] }) => {
       setProdutos(result.data);
     });
   }, [atualizar, token]);
 
-  function handleChange(event) {
+  function handleChange(event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
     const { name, value } = event.target;
     setEntrada(prevState => ({
       ...prevState,
@@ -48,16 +64,16 @@ function Entrada() {
     }));
   }
 
-  function handleSubmit(event) {
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const axiosInstance = axios.create({
-      baseURL: 'http://localhost:8080',
+      baseURL: 'http://13.58.105.88:8080',
       headers: {
         Authorization: `Bearer ${token}`
       }
     });
 
-    axiosInstance.post('/entrada', entrada).then(result => {
+    axiosInstance.post('/entrada', entrada).then((result: any) => {
       setAtualizar(result);
       alert('Entrada realizada com sucesso!');
       limpar();
@@ -67,15 +83,15 @@ function Entrada() {
     });
   }
 
-  function excluir(idEntrada) {
+  function excluir(idEntrada: number) {
     const axiosInstance = axios.create({
-      baseURL: 'http://localhost:8080',
+      baseURL: 'http://13.58.105.88:8080',
       headers: {
         Authorization: `Bearer ${token}`
       }
     });
 
-    axiosInstance.delete(`/entrada/${idEntrada}`).then(result => {
+    axiosInstance.delete(`/entrada/${idEntrada}`).then((result: any) => {
       setAtualizar(result);
       alert('Entrada excluída com sucesso!');
     }).catch(error => {
@@ -84,7 +100,7 @@ function Entrada() {
     });
   }
 
-  function handleProdutoChange(event) {
+  function handleProdutoChange(event: React.ChangeEvent<HTMLSelectElement>) {
     const { value } = event.target;
     setEntrada(prevState => ({
       ...prevState,
@@ -96,7 +112,7 @@ function Entrada() {
     setEntrada({
       dataEntrada: '',
       produto: { nomeProduto: '' },
-      quantidadeProdutoEntrada: '',
+      quantidadeProdutoEntrada: 0,
       tipo: '',
       fornecedor: '',
       notaFiscal: '',
@@ -175,7 +191,7 @@ function Entrada() {
                 <td>{"R$ " + entradaProduto.valorTotal}</td>
                 <td>
                   <button onClick={() => setEntrada(entradaProduto)} className="btn btn-warning">Alterar</button>
-                  <button onClick={() => excluir(entradaProduto.idEntrada)} className="btn btn-danger">Excluir</button>
+                  <button onClick={() => excluir(entradaProduto.idEntrada!)} className="btn btn-danger">Excluir</button>
                 </td>
               </tr>
             ))}

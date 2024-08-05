@@ -17,7 +17,7 @@ function PagInicial() {
     async function fetchQuantidades() {
       try {
         const axiosInstance = axios.create({
-          baseURL: 'http://localhost:8080',
+          baseURL: 'http://13.58.105.88:8080',
           headers: {
             Authorization: `Bearer ${token}` // Inclua o token no cabeçalho
           }

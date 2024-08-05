@@ -1,16 +1,43 @@
+import React, { useState, useEffect, FormEvent } from "react";
 import Sidebar from "../Sidebar/Sidebar";
-import "./Relatorio.css";
-import { useState, useEffect } from "react";
 import axios from "axios";
+import "./Relatorio.css";
+
+interface Funcionario {
+  idFuncionario: number;
+  nomeFuncionario: string;
+}
+
+interface RelatorioComum {
+  id: number;
+  tipo: string;
+  valorTotal: number;
+}
+
+interface RelatorioEntrada extends RelatorioComum {
+  dataEntrada: string;
+  produto: { nomeProduto: string };
+  quantidadeProdutoEntrada: number;
+  fornecedor: string;
+  notaFiscal: string;
+}
+
+interface RelatorioSaida extends RelatorioComum {
+  dataSaida: string;
+  funcionario: { nomeFuncionario: string };
+  produto: { nomeProduto: string };
+  quantidadeProduto: number;
+}
 
 function Relatorio() {
-  const [relatorio, setRelatorio] = useState([]);
-  const [tipoRelatorio, setTipoRelatorio] = useState("");
-  const [valorTotal, setValorTotal] = useState(0);
-  const [funcionarioSelecionado, setFuncionarioSelecionado] = useState("");
-  const [funcionarios, setFuncionarios] = useState([]);
-  const token = localStorage.getItem('token');
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [relatorio, setRelatorio] = useState<(RelatorioEntrada | RelatorioSaida)[]>([]);
+  const [tipoRelatorio, setTipoRelatorio] = useState<string>("");
+  const [valorTotal, setValorTotal] = useState<string>("");
+  const [funcionarioSelecionado, setFuncionarioSelecionado] = useState<string>("");
+  const [funcionarios, setFuncionarios] = useState<Funcionario[]>([]);
+  const token = localStorage.getItem('token') || '';
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
@@ -18,7 +45,7 @@ function Relatorio() {
   useEffect(() => {
     const fetchFuncionarios = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/funcionarios", {
+        const response = await axios.get("http://13.58.105.88:8080/funcionarios", {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -32,46 +59,45 @@ function Relatorio() {
     fetchFuncionarios();
   }, [token]);
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    const formData = new FormData(event.target);
-    const dataInicial = formData.get("dataInicial");
-    const dataFinal = formData.get("dataFinal");
-    const tipo = formData.get("tipo");
+    const formData = new FormData(event.target as HTMLFormElement);
+    const dataInicial = formData.get("dataInicial") as string;
+    const dataFinal = formData.get("dataFinal") as string;
+    const tipo = formData.get("tipo") as string;
 
-    const params = { dataInicial, dataFinal };
+    const params: any = { dataInicial, dataFinal };
     if (tipo === "saida") {
-      const idFuncionario = formData.get("funcionario");
-      if (idFuncionario !== "") {
+      const idFuncionario = formData.get("funcionario") as string;
+      if (idFuncionario) {
         params.funcionario = idFuncionario;
       }
     }
 
     try {
-      const response = await axios.get(`http://localhost:8080/relatorios/${tipo}s`, {
-        params: params,
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
+      const response = await axios.get(`http://13.58.105.88:8080/relatorios/${tipo}s`, {
+  params,
+  headers: {
+    Authorization: `Bearer ${token}`
+  }
+});
 
-      if (response.data.entradas && Array.isArray(response.data.entradas)) {
-        setRelatorio(response.data.entradas);
-        setTipoRelatorio(tipo);
-        setValorTotal(response.data.valorTotal.toFixed(2));
-      } else if (response.data.saidas && Array.isArray(response.data.saidas)) {
-        setRelatorio(response.data.saidas);
-        setTipoRelatorio(tipo);
-        setValorTotal(response.data.valorTotal.toFixed(2));
-      } else {
-        console.error("Erro ao obter dados do relatório: Resposta inválida", response.data);
-      }
+const data: RelatorioEntrada[] | RelatorioSaida[] = tipo === "entrada" ? response.data.entradas : response.data.saidas;
+
+if (Array.isArray(data)) {
+  setRelatorio(data);
+  setTipoRelatorio(tipo);
+  setValorTotal(response.data.valorTotal.toFixed(2));
+} else {
+  console.error("Erro ao obter dados do relatório: Resposta inválida", response.data);
+}
+
     } catch (error) {
       console.error("Erro ao obter dados do relatório:", error);
     }
   };
 
-  const handleFuncionarioChange = (event) => {
+  const handleFuncionarioChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setFuncionarioSelecionado(event.target.value);
   };
 
@@ -89,31 +115,27 @@ function Relatorio() {
           <div className="funcRelatorio">
             <div>
               <label className="form-labelRel"> Data Inicial:</label>
-              <input name="dataInicial" type="date" className="form-controlI" />
+              <input name="dataInicial" type="date" className="form-controlI" required />
             </div>
             <div>
               <label className="form-labelRel"> Data Final:</label>
-              <input name="dataFinal" type="date" className="form-controlF" />
+              <input name="dataFinal" type="date" className="form-controlF" required />
             </div>
             <div>
               <label className="form-labelRel"> Tipo: </label>
               <div>
-                <input type="radio" id="entrada" name="tipo" value="entrada" className="form-check-input" style={{ marginLeft: "40px" }}/>
-                <label htmlFor="entrada" className="form-check-label">
-                  Entrada
-                </label>
+                <input type="radio" id="entrada" name="tipo" value="entrada" className="form-check-input" required style={{ marginLeft: "40px" }} />
+                <label htmlFor="entrada" className="form-check-label">Entrada</label>
               </div>
               <div>
-                <input type="radio" id="saida" name="tipo" value="saida" className="form-check-input" />
-                <label htmlFor="saida" className="form-check-label">
-                  Saída
-                </label>
+                <input type="radio" id="saida" name="tipo" value="saida" className="form-check-input" required />
+                <label htmlFor="saida" className="form-check-label">Saída</label>
               </div>
             </div>
             {tipoRelatorio === "saida" && (
               <div>
                 <label className="form-labelRel"> Funcionário: </label>
-                <select name="funcionario" className="form-control" onChange={handleFuncionarioChange}>
+                <select name="funcionario" className="form-control" value={funcionarioSelecionado} onChange={handleFuncionarioChange}>
                   <option value="">Todos</option>
                   {funcionarios.map(funcionario => (
                     <option key={funcionario.idFuncionario} value={funcionario.idFuncionario}>{funcionario.nomeFuncionario}</option>
@@ -121,13 +143,11 @@ function Relatorio() {
                 </select>
               </div>
             )}
-
             <br />
-            <input type="submit" className="btn btn-success btn-relatorio"  value="Gerar Relatório" />
+            <input type="submit" className="btn btn-success btn-relatorio" value="Gerar Relatório" />
           </div>
         </form>
-        <hr className="linhaRel"/>
-
+        <hr className="linhaRel" />
         {tipoRelatorio && relatorio.length > 0 && (
           <div className="relatorio">
             <h2>{`Relatório de ${tipoRelatorio === "entrada" ? "Entradas" : "Saídas"}:`}</h2>
@@ -158,31 +178,30 @@ function Relatorio() {
                 </tr>
               </thead>
               <tbody>
-              {relatorio.map((item) => (
-                <tr key={item.id}>
-                  {tipoRelatorio === "entrada" ? (
-                    <>
-                      <td>{item.dataEntrada}</td>
-                      <td>{item.produto.nomeProduto}</td>
-                      <td>{item.quantidadeProdutoEntrada}</td>
-                      <td>{item.tipo}</td>
-                      <td>{item.fornecedor}</td>
-                      <td>{item.notaFiscal}</td>
-                      <td>{"R$ " + item.valorTotal}</td>
-                    </>
-                  ) : (
-                    <>
-                      <td>{item.dataSaida}</td>
-                      <td>{item.funcionario.nomeFuncionario}</td>
-                      <td>{item.produto.nomeProduto}</td>
-                      <td>{item.quantidadeProduto}</td>
-                      <td>{item.tipo}</td>
-                      <td>{"R$ " + item.valorTotal}</td>
-                    </>
-                  )}
-                </tr>
-              ))}
-
+                {relatorio.map(item => (
+                  <tr key={item.id}>
+                    {tipoRelatorio === "entrada" ? (
+                      <>
+                        <td>{(item as RelatorioEntrada).dataEntrada}</td>
+                        <td>{(item as RelatorioEntrada).produto.nomeProduto}</td>
+                        <td>{(item as RelatorioEntrada).quantidadeProdutoEntrada}</td>
+                        <td>{item.tipo}</td>
+                        <td>{(item as RelatorioEntrada).fornecedor}</td>
+                        <td>{(item as RelatorioEntrada).notaFiscal}</td>
+                        <td>{"R$ " + item.valorTotal}</td>
+                      </>
+                    ) : (
+                      <>
+                        <td>{(item as RelatorioSaida).dataSaida}</td>
+                        <td>{(item as RelatorioSaida).funcionario.nomeFuncionario}</td>
+                        <td>{(item as RelatorioSaida).produto.nomeProduto}</td>
+                        <td>{(item as RelatorioSaida).quantidadeProduto}</td>
+                        <td>{item.tipo}</td>
+                        <td>{"R$ " + item.valorTotal}</td>
+                      </>
+                    )}
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
@@ -193,3 +212,4 @@ function Relatorio() {
 }
 
 export default Relatorio;
+

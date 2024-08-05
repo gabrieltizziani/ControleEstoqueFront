@@ -71,7 +71,7 @@
   
   .tableCD th,
   .tableCD td {
-    padding: 5px; /* Ajuste o valor conforme necessário */
+    padding: 5px;
     border: 1px solid #ddd;
     text-align: left;
   }
@@ -100,7 +100,7 @@
     
     .tableCD th,
     .tableCD td {
-      padding: 5px; /* Ajuste o valor conforme necessário */
+      padding: 5px; 
       border: 1px solid #ddd;
       text-align: left;
     }
